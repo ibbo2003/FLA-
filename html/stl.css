@@ -1,0 +1,17 @@
+p{
+    color: rgb(74, 89, 105);
+    text-decoration: wavy;
+}
+a{
+    color: darkblue;
+    text-decoration: none;
+}
+a:hover{
+    color:brown;
+    text-decoration: underline;
+
+}
+a:visited{
+    color: lightgreen;
+    text-decoration: line-through;
+}

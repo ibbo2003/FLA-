@@ -1,0 +1,28 @@
+:root{
+    --primary-color: rgb(120, 193, 65);
+    --secondary-color: rgb(243, 246, 241);
+    --padding:20px;
+    --text-color: rgb(191, 191, 197);
+    --border-radius:8px;
+    --brand-fonts: Arial, Helvetica, sans-serif;
+}
+
+body{
+    font-family: var(--brand-fonts);
+    background-color: var(--secondary-color);
+}
+
+nav{
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+section{
+    padding: var(--padding);
+    min-height: 92vh;
+}
+
+footer{
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+

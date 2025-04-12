@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex-box</title>
+    <style>
+        .container{
+            border: 8px solid black;
+            background-color: aliceblue;
+            padding: 5px;
+            height: 300px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 20px;
+        }
+        .flex-box{
+            padding: 15px;
+            color: darkblue;
+            background-color: aquamarine;
+            text-align: center;
+            border: 5px solid red;
+            border-radius: 5px;
+        }
+        .box1{
+            flex: 1 1 100px;
+            background-color: aqua;
+        }
+        .box2{
+            flex: 1 1 120px;
+            background-color: bisque;
+        }
+        .box3{
+            flex: 1 1 150px;
+            background-color: brown;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Flex Box </h1>
+    <div class="container">
+        <div class="flex-box box1">Box1</div>
+        <div class="flex-box box2">Box2</div>
+        <div class="flex-box box3">Box3</div>
+    </div>
+</body>
+</html>

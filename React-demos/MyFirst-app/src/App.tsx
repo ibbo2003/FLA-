@@ -10,13 +10,14 @@ import UserProfile from './components/UserProfile';
 import MovieCard from './components/MovieCard';
 import off from './assets/off.jpg'
 import MovieCardList from './components/MovieCardList';
+import UserList from './components/UserList';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <MovieCardList/>
+      <UserList></UserList>
     </>
   )
 }

@@ -25,8 +25,8 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-dark" to="/menu">
-                Menu
+              <Link className="nav-link text-dark" to="/recipe">
+                  Recipes
               </Link>
             </li>
           </ul>

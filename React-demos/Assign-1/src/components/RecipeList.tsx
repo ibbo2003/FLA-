@@ -12,16 +12,22 @@ function RecipeList() {
   const [menu, setMenu] = useState<items[]>([]);
   const [loading, setloading] = useState<boolean>(true);
   const [error, setError] = useState<boolean | null>(null);
+  const [currentPage , setCurrentPage] = useState<number>(1);
+  const [totalRecipes, setTotalRecipes] = useState<number>(0); // ✅ fix 1
+
+  const List_Per_Page = 8;
+  const skip = (currentPage - 1) * List_Per_Page;
 
   let Loaditems = async () => {
     try {
-      let response = await fetch("https://dummyjson.com/recipes");
+      let response = await fetch(`https://dummyjson.com/recipes?limit=${List_Per_Page}&skip=${skip}`);
       if (!response.ok) {
         throw new Error("Error occurred while calling API");
       }
       let data = await response.json();
       let itemdata: items[] = data.recipes;
       setMenu(itemdata);
+      setTotalRecipes(data.total); 
     } catch (error: any) {
       setError(error.message);
     } finally {
@@ -31,7 +37,13 @@ function RecipeList() {
 
   useEffect(() => {
     Loaditems();
-  }, []);
+  }, [currentPage]); 
+
+  const total_pages = Math.ceil(totalRecipes / List_Per_Page); 
+  const pageNumbers = [];
+  for (let i = 1; i <= total_pages; i++) {
+    pageNumbers.push(i);
+  }
 
   if (loading) {
     return (
@@ -46,7 +58,7 @@ function RecipeList() {
       <h1 className="text-warning text-center">RECIPES</h1>
       <div className="container my-3 bg-muted">
         <div className="row g-4">
-          {menu.slice(0, 10).map((dish) => (
+          {menu.map((dish) => (
             <div
               key={dish.id}
               className="card m-3 bg-warning py-3"
@@ -64,6 +76,47 @@ function RecipeList() {
             </div>
           ))}
         </div>
+        <nav className="mt-4">
+          <ul className="pagination justify-content-center">
+             <button
+                    className= { currentPage===1?'page-link-disabled':'page-link'}
+                    onClick={()=>{
+                      
+                      setCurrentPage(currentPage-1)
+                      
+                    }}
+                >
+                  prev
+                </button>
+            {pageNumbers.map((pagenumber) => (
+              <li
+                className={
+                  currentPage === pagenumber ? "page-item active" : "page-item"
+                }
+                key={pagenumber}
+              >
+               
+                <button
+                  className="page-link"
+                  onClick={() => {
+                    setCurrentPage(pagenumber);
+                    window.scrollTo({ top: 0 });
+                  }}
+                >
+                  {pagenumber}
+                </button>
+                
+              </li>
+              
+            ))}
+            <button
+                    className="page-link"
+                    onClick={()=>{
+                      setCurrentPage(currentPage+1)
+                    }}
+                >next</button>
+          </ul>
+        </nav>
       </div>
     </div>
   );

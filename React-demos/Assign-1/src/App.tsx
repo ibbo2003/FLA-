@@ -11,9 +11,11 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Contact from "./components/Contact";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap-icons/font/bootstrap-icons.min.css";
 import UserList from "./components/UserList";
 import RecipeList from "./components/RecipeList";
 import RecipeDetail from "./components/RecipeDetail";
+import CoursesList from "./components/CoursesList";
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
             <Route path="/users" element={<UserList />} />
             <Route path = '/recipe' element={<RecipeList/>}/>
             <Route path="/recipes/:id" element={<RecipeDetail />} />
+            <Route path="/courses" element={<CoursesList/>}/>
           </Routes>
         </main>
         <Footer />

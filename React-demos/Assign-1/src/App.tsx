@@ -16,6 +16,8 @@ import UserList from "./components/UserList";
 import RecipeList from "./components/RecipeList";
 import RecipeDetail from "./components/RecipeDetail";
 import CoursesList from "./components/CoursesList";
+import AddCourse from "./components/AddCourse";
+import EditCourse from "./components/EditCourse";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
             <Route path = '/recipe' element={<RecipeList/>}/>
             <Route path="/recipes/:id" element={<RecipeDetail />} />
             <Route path="/courses" element={<CoursesList/>}/>
+            <Route path='/add-course' element={<AddCourse/>}/>
+            <Route path="/edit-course/:id" element={<EditCourse />} />
           </Routes>
         </main>
         <Footer />

@@ -4,12 +4,32 @@ import { useNavigate } from "react-router-dom";
 const AddCourse = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [titleError, setTitleError] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
+
   const nav = useNavigate();
+
   const addCourse = async () => {
-    const course = {
-      title,
-      description,
-    };
+    let isValid = true;
+    setTitleError("");
+    setDescriptionError("");
+
+    if (title.trim() === "") {
+      setTitleError("Title is required");
+      isValid = false;
+    }
+
+    if (description.trim() === "") {
+      setDescriptionError("Description is required");
+      isValid = false;
+    }
+
+    if (!isValid) {
+      return; 
+    }
+
+    const course = { title, description };
+
     try {
       await fetch(
         "https://6835c573cd78db2058c317c8.mockapi.io/coursesapp/courses",
@@ -20,49 +40,50 @@ const AddCourse = () => {
           },
           body: JSON.stringify(course),
         }
-        
       );
+
       nav("/courses");
     } catch (error) {
-      console.log(error);
+      console.log("Error adding course:", error);
     }
   };
+
   return (
     <div className="container">
-      <h2 className="text-primary my-4"> Add course</h2>
-      <div
-        id="addCourseform"
-        className="border border-2 rounded shadow p-4 bg-light"
-      >
-        <div className="my-4">
-          <label htmlFor="title" className="form-label">
-            Enter the Course Title :
-          </label>
+      <h2 className="text-primary my-4">Add Course</h2>
+      <div className="border border-2 rounded shadow p-4 bg-light">
+        <div className="mb-3">
+          <label className="form-label">Enter the Course Title:</label>
           <input
             type="text"
-            className="form-control"
-            placeholder="eg : Frontend"
+            className={`form-control ${titleError ? "is-invalid" : ""}`}
+            placeholder="e.g., Frontend"
             value={title}
-            onChange={(event)=>setTitle(event.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
           />
+          {titleError && <div className="text-danger mt-1">{titleError}</div>}
         </div>
-        <div>
-          <label htmlFor="description" className="form-label">
-            Enter the Course Description :
-          </label>
+
+        <div className="mb-3">
+          <label className="form-label">Enter the Course Description:</label>
           <input
             type="text"
-            className="form-control"
+            className={`form-control ${descriptionError ? "is-invalid" : ""}`}
             placeholder="Describe your course"
             value={description}
-            onChange={(event)=>setDescription(event.target.value)}
+            onChange={(e) => setDescription(e.target.value)}
           />
+          {descriptionError && (
+            <div className="text-danger mt-1">{descriptionError}</div>
+          )}
         </div>
-        <div className="mt-5">
-          <button className="btn btn-primary" onClick={()=>addCourse()}>Add Course</button>
-        </div>
+
+        <button className="btn btn-primary mt-4" onClick={addCourse}>
+          Add Course
+        </button>
       </div>
     </div>
   );
 };
+
 export default AddCourse;

@@ -11,11 +11,11 @@ const AddCourse = () => {
 
   const addCourse = async () => {
     let isValid = true;
-    setTitleError("");
     setDescriptionError("");
 
     if (title.trim() === "") {
       setTitleError("Title is required");
+      alert('title is required');
       isValid = false;
     }
 

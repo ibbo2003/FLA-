@@ -18,6 +18,7 @@ import RecipeDetail from "./components/RecipeDetail";
 import CoursesList from "./components/CoursesList";
 import AddCourse from "./components/AddCourse";
 import EditCourse from "./components/EditCourse";
+import ToDoList from "./components/ToDoList";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/courses" element={<CoursesList/>}/>
             <Route path='/add-course' element={<AddCourse/>}/>
             <Route path="/edit-course/:id" element={<EditCourse />} />
+            <Route path="/todolist" element={<ToDoList />} />
           </Routes>
         </main>
         <Footer />
